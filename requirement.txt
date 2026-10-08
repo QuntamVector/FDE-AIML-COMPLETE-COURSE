@@ -4,3 +4,5 @@ streamlit
 langchain-community
 pydantic
 pydantic[email]
+langchain-ollama
+langchain-groq
