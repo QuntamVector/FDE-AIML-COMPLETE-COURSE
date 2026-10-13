@@ -6,3 +6,7 @@ pydantic
 pydantic[email]
 langchain-ollama
 langchain-groq
+langchain-openai
+openai
+langchain-core
+langchain-google-genai
