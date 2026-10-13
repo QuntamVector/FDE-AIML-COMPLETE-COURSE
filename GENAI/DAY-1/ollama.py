@@ -12,7 +12,7 @@ temperature = st.slider("Temperature",0.0,1.0,0.7) #start end defualt
 # Prompt 
 prompt = ChatPromptTemplate.from_messages(
     [
-        ("system","you are helpfull assitnat"),
+        ("system"," you are programing assitant answer only related progrming."),
         ("user","Question: {question}")
     ]
 )
