@@ -13,3 +13,4 @@ langchain-google-genai
 tqdm
 langchain-text-splitters
 pypdf
+pymupdf
