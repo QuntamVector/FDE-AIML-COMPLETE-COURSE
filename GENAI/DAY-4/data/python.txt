@@ -1,0 +1,5 @@
+Python is a high-level, interpreted programming language celebrated for its clear syntax and exceptional readability. Created by Guido van Rossum and released in 1991, its design philosophy emphasizes developer productivity and clean code structure.
+
+As a versatile, multi-paradigm language, Python natively supports object-oriented, functional, and procedural programming styles. Its extensive standard library, paired with an enormous open-source ecosystem featuring powerful packages like NumPy, Pandas, Django, and PyTorch, makes it an industry cornerstone.
+
+Today, Python dominates key technology fields, including data science, machine learning, web backend development, and scientific computing. Its gentle learning curve empowers beginners while providing sufficient depth for enterprise-grade applications. 
