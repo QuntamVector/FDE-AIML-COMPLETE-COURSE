@@ -14,3 +14,13 @@ tqdm
 langchain-text-splitters
 pypdf
 pymupdf
+python-docx
+docx2txt
+unstructured
+openpyxl
+xlrd
+msoffcrypto-tool
+matplotlib
+langchain_huggingface
+sentence-transformers
+chromadb
