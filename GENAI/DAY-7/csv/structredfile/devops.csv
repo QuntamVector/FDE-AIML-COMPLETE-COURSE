@@ -1,0 +1,6 @@
+Tool,Category,Rating,Users,Description
+Docker,Containerization,4.8,95000,Platform for building and running applications in containers
+Kubernetes,Orchestration,4.9,120000,Container orchestration platform for automating deployments and scaling
+Jenkins,CI/CD,4.5,78000,Automation server used for continuous integration and delivery
+Terraform,Infrastructure as Code,4.7,65000,Infrastructure as code tool for provisioning cloud resources
+Prometheus,Monitoring,4.6,72000,Monitoring and alerting toolkit for cloud-native applications

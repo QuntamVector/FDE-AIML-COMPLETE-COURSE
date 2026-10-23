@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width-device-width, initial-scale=1" />
+    <meta http-equiv="cache-control" content="no-cache, no-store, must-revalidate">
+    <meta http-equiv="pragma" content="no-cache">
+    <meta http-equiv="expires" content="0">
+    <meta charset="utf-8" />
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: rgb(247,247,247);
+        }
+
+        <style >
+
+        header img {
+            display: block;
+            margin: 0 auto;
+        }
+    </style>
+
+    <style>
+        header {
+            text-align: center;
+            font-family: Arial, sans-serif;
+            color: rgb(255,131,0)
+        }
+    </style>
+    <title>Use of Generative AI at HPE</title>
+</head>
+<body>
+    <header>
+        <img src="HPE_logo.png" alt="HPE Logo" width="172" height="80" <br />
+    </header>
+
+
+    <p style="font-size: 18px">
+
+        The site you are trying to visit utilizes artificial intelligence (AI) to generate new content, such as text, images, and code based on input data.
+        <br />
+        <br />
+        As with any application of AI, there are risks that come with its use, including leakage of sensitive data.  Any HPE company data provided to an AI system can be used to generate content for external parties, including our competitors. Accordingly, this <b>site is subject to HPE restrictions on external disclosure</b> of HPE information.
+        <br />
+        <br />
+
+        Please read the requirements for use:
+        <br />
+        <ul style="font-size: 18px">
+
+            <li>
+                You are prohibited from inputting HPE company data into generative AI systems. As a reminder, the <a href="https://hpe.sharepoint.com/teams/CorporateStdDMT/Approved/HPE010-04.pdf?OR=Teams-HL&amp;CT=1681766680914" class="u-active-none u-border-none u-btn u-button-style u-hover-none u-none u-text-palette-1-base u-btn-1">HPE Confidential Information Policy</a> governs the
+                handling and disclosure of HPE information.
+            </li>
+
+            <br />
+            <li>You are prohibited from generating code from generative AI systems.</li>
+            <br />
+            <li> Be cautious with the output from generative AI. These systems often generate inaccurate or outdated information – factual errors, biased responses, and more – so output should always be vetted through trusted sources prior to use.</li>
+            <br />
+        </ul>
+    </p>  
+    <p style="font-size: 18px">
+        Failure to follow the requirements above will be treated as a security incident and/or privacy breach and may be investigated and subject to appropriate disciplinary measures.
+        <br />
+        <br />
+        If you have any questions, please direct them to the
+        <a href="https://m2.now.hpe.com/uc/r/c/?v=0019EcdVg018gdQheWOAEMz8gMn8gIRTEcdVgCRvGO49s2OvG27WsrzaE6fAE1Rqg6cqE27qLWXvR2PAscSWs6JWG0zaR2Bvs0_" class="u-active-none u-border-none u-btn u-button-style u-hover-none u-none u-text-palette-1-base u-btn-1">#ask-gen-ai</a> Slack channel.
+
+
+    </p>
+    <form id="continue_action" method="GET" action=https://gateway.zscalerthree.net:443/_sm_ctn>
+        <input type="hidden" name="_sm_url" value="">
+        <input type="hidden" name="_sm_rid" value="">
+        <input type="hidden" name="_sm_cat" value="">
+        <input type="submit" value="Click HERE to agree" id="submitButton">
+    </form>
+    <script>
+        const queryString = window.location.search;
+        console.log(queryString);
+        const urlParams = new URLSearchParams(queryString);
+        const continueURL = urlParams.get('url');
+        document.getElementsByName("_sm_url")[0].setAttribute('value', continueURL);
+        const category = urlParams.get('cat');
+        document.getElementsByName("_sm_cat")[0].setAttribute('value', category);
+        const zsq = urlParams.get('zsq').split("zsq")[0];
+        document.getElementsByName("_sm_rid")[0].setAttribute('value', zsq);
+    </script>
+
+
+
+
+</body>
+
+
+</html>
+
+
