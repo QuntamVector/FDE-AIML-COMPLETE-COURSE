@@ -1,0 +1,9 @@
+streamlit
+python-dotenv
+langchain-community
+langchain-core
+langchain-openai
+langchain-text-splitters
+langchain-astradb
+astrapy
+pymupdf
