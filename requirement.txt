@@ -25,3 +25,4 @@ langchain_huggingface
 sentence-transformers
 chromadb
 langchain-astradb
+faiss-cpu

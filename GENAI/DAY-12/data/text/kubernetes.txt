@@ -1,0 +1,850 @@
+# KUBERNETES QUESTIONS AND ANSWERS
+## Knowledge Base for LangChain, RAG, and GenAI
+
+==================================================
+SECTION 1: KUBERNETES FUNDAMENTALS
+==================================================
+
+Q1. What is Kubernetes?
+
+Answer: Kubernetes is an open-source container orchestration platform. It automates the deployment, scaling, networking, and management of containerized applications.
+
+Q2. What is the full form of K8s?
+
+Answer: K8s is an abbreviation for Kubernetes. The number 8 represents the eight letters between K and s.
+
+Q3. Why do we use Kubernetes?
+
+Answer: Kubernetes automates application deployment, scaling, service discovery, load balancing, and recovery from many container failures.
+
+Q4. What is container orchestration?
+
+Answer: Container orchestration is the automated management of containerized applications, including scheduling, scaling, networking, and lifecycle management.
+
+Q5. What is a container?
+
+Answer: A container is an isolated process packaged with an application and its required dependencies. Containers help applications run consistently across different environments.
+
+Q6. What is a Kubernetes cluster?
+
+Answer: A Kubernetes cluster is a group of machines that work together to run containerized applications. It consists of a control plane and worker nodes.
+
+Q7. What is a node in Kubernetes?
+
+Answer: A node is a physical or virtual machine that participates in a Kubernetes cluster. Worker nodes run application Pods, while control plane nodes manage the cluster.
+
+Q8. What is the control plane?
+
+Answer: The control plane manages the cluster's desired state, scheduling decisions, API requests, and resource coordination.
+
+Q9. What is a worker node?
+
+Answer: A worker node runs application workloads. It contains components such as kubelet, a container runtime, and networking components required to run Pods.
+
+Q10. What is declarative configuration in Kubernetes?
+
+Answer: Declarative configuration means describing the desired state of a resource in a manifest. Kubernetes controllers work to make the actual state match the declared state.
+
+Q11. What is a Kubernetes manifest?
+
+Answer: A Kubernetes manifest is a YAML or JSON document that describes a Kubernetes resource, such as a Pod, Deployment, Service, or ConfigMap.
+
+Q12. What is kubectl?
+
+Answer: kubectl is the command-line tool used to communicate with the Kubernetes API server and manage cluster resources.
+
+Q13. What is a namespace?
+
+Answer: A namespace logically separates and organizes resources within a Kubernetes cluster. It can help teams manage access and resource allocation.
+
+Q14. What are some common Kubernetes namespaces?
+
+Answer: Common namespaces include default, kube-system, kube-public, and kube-node-lease. Additional namespaces are often created for applications and teams.
+
+Q15. What is a managed Kubernetes service?
+
+Answer: A managed Kubernetes service reduces the operational work involved in running Kubernetes. Examples include Amazon EKS, Azure AKS, and Google GKE.
+
+Q16. Is Kubernetes a container runtime?
+
+Answer: No. Kubernetes orchestrates containers, while a container runtime such as containerd executes containers on a node.
+
+Q17. What is desired state in Kubernetes?
+
+Answer: Desired state is the configuration declared by the user, such as the required number of replicas, image version, and application settings.
+
+Q18. What is self-healing in Kubernetes?
+
+Answer: Self-healing is Kubernetes' ability to take corrective actions, such as restarting failed containers or replacing failed Pods managed by controllers.
+
+Q19. Can Kubernetes run on a local computer?
+
+Answer: Yes. Tools such as kind, Minikube, and Docker Desktop can provide local Kubernetes environments for development and learning.
+
+Q20. What types of applications can Kubernetes manage?
+
+Answer: Kubernetes can manage web applications, APIs, microservices, background workers, and stateful workloads when they are configured appropriately.
+
+==================================================
+SECTION 2: KUBERNETES ARCHITECTURE
+==================================================
+
+Q21. What are the main control plane components?
+
+Answer: The main control plane components are kube-apiserver, etcd, kube-scheduler, and kube-controller-manager. Cloud environments may also use cloud-controller-manager.
+
+Q22. What is kube-apiserver?
+
+Answer: kube-apiserver exposes the Kubernetes API. It validates API requests and provides the interface through which users and cluster components interact with cluster state.
+
+Q23. What is etcd?
+
+Answer: etcd is a distributed key-value store that holds Kubernetes cluster state and configuration data. It is a critical component for cluster recovery.
+
+Q24. What is kube-scheduler?
+
+Answer: kube-scheduler selects an appropriate node for each unscheduled Pod based on resource availability, scheduling constraints, affinity rules, and other policies.
+
+Q25. What is kube-controller-manager?
+
+Answer: kube-controller-manager runs controllers that monitor resources and take actions to move the cluster toward its desired state.
+
+Q26. What is cloud-controller-manager?
+
+Answer: cloud-controller-manager integrates Kubernetes with a cloud provider for supported operations such as managing load balancers, routes, or node information.
+
+Q27. What is kubelet?
+
+Answer: kubelet is the agent running on each node. It communicates with the control plane and ensures that the containers specified for assigned Pods are running.
+
+Q28. What is kube-proxy?
+
+Answer: kube-proxy implements Service networking behavior on many Kubernetes clusters. Some network plugins provide equivalent functionality without kube-proxy.
+
+Q29. What is a container runtime?
+
+Answer: A container runtime executes containers. Kubernetes commonly uses containerd or another supported runtime through the Container Runtime Interface.
+
+Q30. What happens when a user creates a Deployment?
+
+Answer: The API server validates and stores the requested resource. The Deployment controller creates or updates a ReplicaSet, which manages Pods. The scheduler assigns Pods to nodes, and kubelet works with the runtime to start their containers.
+
+Q31. What happens when a worker node fails?
+
+Answer: The control plane detects node health problems. Depending on the failure and configured timing, Pods may be considered unavailable and replacement Pods may be scheduled on healthy nodes.
+
+Q32. How does Kubernetes store cluster state?
+
+Answer: Kubernetes stores persistent API resource state in etcd. Components interact with this state through the API server rather than directly modifying etcd.
+
+Q33. What is a Kubernetes controller?
+
+Answer: A controller is a control loop that observes resource state and makes changes to move actual state toward desired state.
+
+Q34. What is reconciliation?
+
+Answer: Reconciliation is the process of repeatedly comparing actual state with desired state and taking corrective action when differences are detected.
+
+Q35. What is the Kubernetes API?
+
+Answer: The Kubernetes API is the interface used to create, inspect, update, and delete cluster resources.
+
+Q36. What is the role of the scheduler?
+
+Answer: The scheduler chooses a suitable node for a Pod that has not yet been assigned to one. It does not itself start the container.
+
+Q37. What is a cluster certificate?
+
+Answer: A cluster certificate is used in supported authentication and encryption arrangements to establish trusted identities or secure communication between Kubernetes components.
+
+Q38. Why is etcd backup important?
+
+Answer: An etcd backup can help recover Kubernetes cluster state after certain failures. Backups must be protected and periodically tested through recovery procedures.
+
+Q39. Can a Kubernetes application continue running if the API server becomes unavailable?
+
+Answer: Existing containers may continue running temporarily because their processes already exist on nodes. However, management operations, scheduling, and reconciliation may be impaired.
+
+Q40. What is high availability in Kubernetes?
+
+Answer: High availability aims to reduce service interruptions through redundant control plane components, multiple worker nodes, resilient applications, and appropriate failure-domain distribution.
+
+==================================================
+SECTION 3: PODS AND CONTAINERS
+==================================================
+
+Q41. What is a Pod?
+
+Answer: A Pod is the smallest deployable unit in Kubernetes. It contains one or more containers that share networking and can share configured storage.
+
+Q42. Can a Pod contain multiple containers?
+
+Answer: Yes. Multiple containers can run in one Pod when they need to work closely together, such as an application container and a logging sidecar.
+
+Q43. What is a sidecar container?
+
+Answer: A sidecar is a supporting container that runs alongside an application container, often providing capabilities such as logging, proxying, or telemetry collection.
+
+Q44. Do containers in the same Pod share an IP address?
+
+Answer: Yes. Containers in the same Pod share the Pod network namespace and IP address, and they can communicate through localhost.
+
+Q45. What happens when a Pod is deleted?
+
+Answer: The Pod is removed. If it is managed by a Deployment or another controller, the controller may create a replacement to maintain the desired state.
+
+Q46. Are Pod IP addresses permanent?
+
+Answer: No. A replacement Pod can receive a different IP address. Services provide stable access to matching Pods.
+
+Q47. What is a container image?
+
+Answer: A container image contains the filesystem and metadata needed to create a container, including application files and dependencies.
+
+Q48. What is ImagePullBackOff?
+
+Answer: ImagePullBackOff indicates that Kubernetes could not pull a container image and is retrying with increasing delays. Causes include invalid image names, missing registry credentials, and network problems.
+
+Q49. What is CrashLoopBackOff?
+
+Answer: CrashLoopBackOff means a container repeatedly starts and exits, and Kubernetes is delaying subsequent restart attempts. Logs and events help identify the cause.
+
+Q50. How do you list Pods?
+
+Answer: Run `kubectl get pods` to list Pods in the current namespace, or `kubectl get pods -A` to list Pods across namespaces.
+
+Q51. How do you inspect a Pod?
+
+Answer: Run `kubectl describe pod POD_NAME` to inspect the Pod configuration, status, conditions, and related events.
+
+Q52. How do you view Pod logs?
+
+Answer: Run `kubectl logs POD_NAME`. For a specific container in a multi-container Pod, use `kubectl logs POD_NAME -c CONTAINER_NAME`.
+
+Q53. How do you view logs from a previous container instance?
+
+Answer: Run `kubectl logs POD_NAME --previous`. This can help investigate a container that crashed and restarted.
+
+Q54. What does Pending mean for a Pod?
+
+Answer: Pending means the Pod has not completed scheduling or setup. Possible causes include insufficient node resources, scheduling constraints, or storage provisioning problems.
+
+Q55. What does Running mean for a Pod?
+
+Answer: Running generally means the Pod has been bound to a node and at least one container is running or starting or restarting. It does not guarantee that the application is ready to serve traffic.
+
+Q56. What is a Pod specification?
+
+Answer: A Pod specification describes details such as containers, images, ports, resource requests, environment variables, volumes, and health probes.
+
+Q57. What is a container port?
+
+Answer: A container port documents a port that a containerized application uses. Declaring a container port alone does not expose the application externally.
+
+Q58. What is an init container?
+
+Answer: An init container runs before the application containers in a Pod. It can perform setup tasks such as preparing files or waiting for a dependency.
+
+Q59. What is an ephemeral container?
+
+Answer: An ephemeral container is a temporary container that can be added to a running Pod for troubleshooting, subject to cluster permissions and support.
+
+Q60. Why should Pods usually be managed by Deployments?
+
+Answer: Deployments provide declarative management, replica maintenance, and rolling updates for stateless applications, avoiding the need to recreate standalone Pods manually.
+
+==================================================
+SECTION 4: DEPLOYMENTS AND REPLICASETS
+==================================================
+
+Q61. What is a Deployment?
+
+Answer: A Deployment manages a set of replicated application Pods through ReplicaSets. It supports scaling, rolling updates, and rollout history.
+
+Q62. What is a ReplicaSet?
+
+Answer: A ReplicaSet maintains a specified number of matching Pod replicas. Deployments normally manage ReplicaSets for application releases.
+
+Q63. What is the difference between a Pod and a Deployment?
+
+Answer: A Pod is an individual deployable workload unit. A Deployment manages replicated Pods and supports controlled application updates.
+
+Q64. How do you create a Deployment?
+
+Answer: Use a Deployment YAML manifest and run `kubectl apply -f deployment.yaml`. You can also create a basic Deployment with `kubectl create deployment NAME --image=IMAGE`.
+
+Q65. How do you scale a Deployment?
+
+Answer: Run `kubectl scale deployment NAME --replicas=3` to request three replicas, or update the replicas field in the Deployment manifest.
+
+Q66. What happens if a Pod managed by a Deployment fails?
+
+Answer: The ReplicaSet attempts to maintain the desired replica count by creating a replacement Pod when appropriate.
+
+Q67. What is a rolling update?
+
+Answer: A rolling update gradually replaces old application Pods with new ones while attempting to maintain availability according to the Deployment strategy.
+
+Q68. What is maxSurge?
+
+Answer: maxSurge specifies how many additional Pods may be created above the desired replica count during a rolling update.
+
+Q69. What is maxUnavailable?
+
+Answer: maxUnavailable specifies how many replicas may be unavailable during a rolling update.
+
+Q70. How do you check rollout status?
+
+Answer: Run `kubectl rollout status deployment/NAME` to check whether the Deployment rollout has completed.
+
+Q71. How do you view Deployment rollout history?
+
+Answer: Run `kubectl rollout history deployment/NAME` to inspect the recorded rollout revisions.
+
+Q72. How do you roll back a Deployment?
+
+Answer: Run `kubectl rollout undo deployment/NAME` to roll back to a previous revision when a suitable revision exists.
+
+Q73. Does rolling back a Deployment reverse database changes?
+
+Answer: No. Rolling back a Deployment changes its managed application configuration but does not automatically reverse database migrations or external system changes.
+
+Q74. What are labels in Kubernetes?
+
+Answer: Labels are key-value pairs attached to resources. They help organize objects and allow selectors to identify groups of resources.
+
+Q75. What is a selector?
+
+Answer: A selector matches resources based on labels or expressions. Deployments and Services use selectors to identify the Pods they manage or route traffic to.
+
+Q76. What happens if a Deployment selector does not match Pod labels?
+
+Answer: The Deployment may fail validation or be unable to manage the intended Pods correctly. A Service with a nonmatching selector may have no usable endpoints.
+
+Q77. How do you check Deployment status?
+
+Answer: Run `kubectl get deployments` or `kubectl describe deployment NAME` to inspect desired replicas, available replicas, conditions, and events.
+
+Q78. What is a StatefulSet?
+
+Answer: A StatefulSet manages workloads that need stable Pod identities and often persistent storage, such as databases and distributed stateful systems.
+
+Q79. What is a DaemonSet?
+
+Answer: A DaemonSet ensures that a Pod runs on each eligible node, or on each eligible node selected by its configuration. It is commonly used for node-level agents.
+
+Q80. What is a Job in Kubernetes?
+
+Answer: A Job manages Pods that run to completion. Jobs are useful for finite tasks such as data processing, batch calculations, and one-time operations.
+
+==================================================
+SECTION 5: SERVICES AND NETWORKING
+==================================================
+
+Q81. What is a Kubernetes Service?
+
+Answer: A Service provides a stable network endpoint for accessing a logical group of Pods, usually selected through labels.
+
+Q82. What is a ClusterIP Service?
+
+Answer: ClusterIP exposes a Service through an internal cluster IP address. It is the default Service type and is commonly used for internal communication.
+
+Q83. What is a NodePort Service?
+
+Answer: NodePort exposes a Service through a port on cluster nodes. External reachability depends on networking and firewall configuration.
+
+Q84. What is a LoadBalancer Service?
+
+Answer: LoadBalancer requests an external load balancer from a supported infrastructure provider or integration, enabling access from outside the cluster.
+
+Q85. What is the difference between ClusterIP and LoadBalancer?
+
+Answer: ClusterIP provides an internal cluster endpoint, while LoadBalancer can provision an external load-balancing endpoint when the platform supports it.
+
+Q86. What is a headless Service?
+
+Answer: A headless Service is configured with `clusterIP: None`. It supports service discovery without a normal virtual cluster IP.
+
+Q87. What is CoreDNS?
+
+Answer: CoreDNS is a DNS server commonly used in Kubernetes clusters to provide DNS-based service discovery for applications and cluster resources.
+
+Q88. What is targetPort?
+
+Answer: targetPort identifies the port on the selected Pod where the application receives traffic. It may be a number or a named container port.
+
+Q89. What is the difference between port and targetPort?
+
+Answer: The Service port is the port clients use to access the Service. targetPort is the destination port on the selected Pod.
+
+Q90. What is Ingress?
+
+Answer: Ingress is a Kubernetes API resource that defines HTTP and HTTPS routing rules for traffic entering a cluster.
+
+Q91. Does an Ingress resource work by itself?
+
+Answer: No. An Ingress controller must implement the routing rules. The controller and its infrastructure determine how traffic enters the cluster.
+
+Q92. What is a NetworkPolicy?
+
+Answer: A NetworkPolicy defines rules for allowing selected network traffic to or from Pods. Enforcement requires a compatible network plugin.
+
+Q93. How do Pods communicate with one another?
+
+Answer: Pods generally communicate over the cluster's Pod network using Pod IP addresses or stable Service DNS names, subject to network policies and routing configuration.
+
+Q94. How do you expose an application in a local cluster?
+
+Answer: Depending on the environment, you can use `kubectl port-forward`, NodePort, an Ingress controller, or a supported LoadBalancer implementation.
+
+Q95. What is service discovery?
+
+Answer: Service discovery lets applications find other services using stable names or endpoints instead of relying on changing Pod IP addresses.
+
+Q96. What is a CNI plugin?
+
+Answer: A Container Network Interface plugin implements networking functions for containers and Pods, including connectivity and potentially network policy enforcement.
+
+Q97. What is Gateway API?
+
+Answer: Gateway API is a Kubernetes networking API that provides resources for modeling traffic routing and infrastructure roles more expressively than basic Ingress.
+
+Q98. Why might a Service have no endpoints?
+
+Answer: Common reasons include mismatched selectors and Pod labels, missing Pods, readiness failures, or other endpoint-management issues.
+
+Q99. How do you troubleshoot a Service?
+
+Answer: Check the Service with `kubectl describe service NAME`, inspect Pod labels and readiness, and examine EndpointSlices with `kubectl get endpointslices`.
+
+Q100. Why can an external LoadBalancer remain pending?
+
+Answer: The cluster may lack a compatible load balancer controller, cloud permissions, network configuration, or supported infrastructure for provisioning the requested load balancer.
+
+==================================================
+SECTION 6: CONFIGMAPS AND SECRETS
+==================================================
+
+Q101. What is a ConfigMap?
+
+Answer: A ConfigMap stores non-confidential configuration data that applications can consume through environment variables, command arguments, or mounted files.
+
+Q102. Why do we use ConfigMaps?
+
+Answer: ConfigMaps separate application configuration from container images, making it easier to configure the same application differently across environments.
+
+Q103. What is a Secret?
+
+Answer: A Secret is a Kubernetes resource intended to hold sensitive information such as passwords, tokens, and credentials.
+
+Q104. Are Kubernetes Secrets automatically encrypted?
+
+Answer: Secret values are base64-encoded in their standard API representation, which is not encryption. Encryption at rest and appropriate access controls must be configured.
+
+Q105. What is the difference between ConfigMap and Secret?
+
+Answer: ConfigMaps hold non-confidential configuration. Secrets are intended for sensitive data and should be protected with suitable encryption, permissions, and handling practices.
+
+Q106. How can a Pod consume a ConfigMap?
+
+Answer: A Pod can consume ConfigMap values as environment variables, command arguments, or mounted configuration files.
+
+Q107. How can a Pod consume a Secret?
+
+Answer: A Pod can expose Secret values through environment variables or mount them as files, depending on the application's requirements.
+
+Q108. How do you create a ConfigMap from a file?
+
+Answer: Run `kubectl create configmap app-config --from-file=application.properties` to create a ConfigMap from a file.
+
+Q109. How do you create a Secret from a literal value?
+
+Answer: Run `kubectl create secret generic app-secret --from-literal=username=myuser`. Avoid using real credentials in shared terminal history or teaching examples.
+
+Q110. Do environment variables automatically update after a Secret changes?
+
+Answer: No. Environment variables injected into an existing container do not automatically refresh when the underlying Secret changes. A restart or another refresh mechanism may be required.
+
+Q111. Do mounted Secret files update automatically?
+
+Answer: Kubernetes can update projected Secret volumes eventually, but applications must handle file changes correctly. A Secret mounted using subPath does not receive automatic updates.
+
+Q112. What is RBAC?
+
+Answer: Role-Based Access Control restricts access to Kubernetes API resources by granting specified permissions to users, groups, or service accounts.
+
+Q113. What is a ServiceAccount?
+
+Answer: A ServiceAccount provides an identity for processes running in Pods when they need to interact with the Kubernetes API or integrated services.
+
+Q114. What is least privilege?
+
+Answer: Least privilege means granting only the permissions necessary for a user or workload to perform its required tasks.
+
+Q115. What is AWS Secrets Manager?
+
+Answer: AWS Secrets Manager is a managed service for storing, accessing, and rotating secrets. Applications running on AWS can retrieve secrets through authorized identities and permissions.
+
+Q116. What is IAM Roles for Service Accounts in Amazon EKS?
+
+Answer: IAM Roles for Service Accounts, or IRSA, associates an IAM role with a Kubernetes ServiceAccount so authorized workloads can obtain AWS credentials through the configured identity mechanism.
+
+Q117. Why should credentials not be committed to Git?
+
+Answer: Committing credentials risks exposing them to repository users, forks, logs, and history. Use a secret manager and rotate exposed credentials promptly.
+
+Q118. How should application configuration be managed?
+
+Answer: Keep environment-specific configuration outside container images, use ConfigMaps for non-sensitive values, and use suitable secret-management systems for credentials.
+
+Q119. Why should Secrets have restricted permissions?
+
+Answer: Anyone who can read sensitive Secrets may gain access to passwords, tokens, or other credentials. Restricting permissions reduces the impact of unauthorized access.
+
+Q120. What is secret rotation?
+
+Answer: Secret rotation is the process of replacing credentials periodically or after exposure and ensuring dependent applications can use the new credentials safely.
+
+==================================================
+SECTION 7: STORAGE AND STATEFUL APPLICATIONS
+==================================================
+
+Q121. What is a Kubernetes Volume?
+
+Answer: A Volume provides storage that one or more containers in a Pod can access. Its lifecycle depends on the volume type and the resources backing it.
+
+Q122. What is ephemeral storage?
+
+Answer: Ephemeral storage is temporary storage associated with a Pod or container lifecycle. Data stored only in a container's writable layer may be lost when that container is replaced.
+
+Q123. What is a PersistentVolume?
+
+Answer: A PersistentVolume, or PV, represents a storage resource made available to the Kubernetes cluster.
+
+Q124. What is a PersistentVolumeClaim?
+
+Answer: A PersistentVolumeClaim, or PVC, is a request for storage with specified capacity, access modes, and possibly a storage class.
+
+Q125. What is a StorageClass?
+
+Answer: A StorageClass describes a class of storage and its provisioning parameters. It can enable dynamic creation of persistent storage.
+
+Q126. What is dynamic volume provisioning?
+
+Answer: Dynamic provisioning automatically creates storage resources in response to eligible PersistentVolumeClaims when a suitable StorageClass and provisioner are configured.
+
+Q127. What is CSI?
+
+Answer: The Container Storage Interface is a standard interface that allows storage vendors to integrate their storage systems with Kubernetes.
+
+Q128. What is the purpose of a StatefulSet?
+
+Answer: A StatefulSet manages workloads requiring stable identities and often persistent storage, such as databases or distributed data services.
+
+Q129. Can a PVC survive Pod deletion?
+
+Answer: Yes. A PVC and its backing storage can survive Pod deletion. Actual retention and deletion behavior depend on the storage lifecycle and reclaim policies.
+
+Q130. What is a volume access mode?
+
+Answer: A volume access mode describes supported ways a volume can be mounted or accessed, such as ReadWriteOnce, ReadOnlyMany, or ReadWriteMany. Actual behavior depends on the storage implementation.
+
+Q131. What does ReadWriteOnce mean?
+
+Answer: ReadWriteOnce generally permits read-write mounting from a single node. It does not necessarily mean that only one Pod on that node can use the volume.
+
+Q132. What is a storage reclaim policy?
+
+Answer: A reclaim policy determines what happens to a PersistentVolume after its claim is released. Common policies include Retain and Delete, depending on the volume type and configuration.
+
+Q133. Why are backups important for stateful applications?
+
+Answer: Backups protect application data against deletion, corruption, infrastructure failures, and other incidents. Restoration must be tested to confirm recoverability.
+
+Q134. What is a database StatefulSet deployment?
+
+Answer: It is a way to manage database Pods with stable identities and persistent storage associations. Production databases also need replication, backup, security, and recovery planning.
+
+Q135. What is a local PersistentVolume?
+
+Answer: A local PersistentVolume uses storage attached to a specific node. It can provide performance benefits but creates node-placement and recovery considerations.
+
+Q136. What is storage provisioning?
+
+Answer: Storage provisioning is the process of making storage available to an application, either by assigning existing capacity or creating storage dynamically.
+
+Q137. What is a volume mount?
+
+Answer: A volume mount makes a volume available at a specified filesystem path inside a container.
+
+Q138. What is a snapshot in storage?
+
+Answer: A storage snapshot captures a point-in-time representation of a volume when supported by the storage platform and configured integration.
+
+Q139. How should persistent storage capacity be monitored?
+
+Answer: Monitor requested capacity, actual consumption, volume health, latency, throughput, and growth so that capacity problems can be addressed before applications fail.
+
+Q140. What is disaster recovery for Kubernetes applications?
+
+Answer: Disaster recovery includes restoring application data, cluster configuration, secrets, infrastructure, and dependencies after a major failure, using documented and tested recovery procedures.
+
+==================================================
+SECTION 8: RESOURCES, SCHEDULING, AND SCALING
+==================================================
+
+Q141. What is a CPU request?
+
+Answer: A CPU request specifies the CPU amount a container asks Kubernetes to account for when scheduling its Pod.
+
+Q142. What is a memory request?
+
+Answer: A memory request specifies the amount of memory Kubernetes uses when determining whether a Pod can fit on a node.
+
+Q143. What is a resource limit?
+
+Answer: A resource limit defines a maximum resource boundary for a container. CPU limits can cause throttling, while exceeding a memory limit can cause termination.
+
+Q144. What does OOMKilled mean?
+
+Answer: OOMKilled indicates that a container was terminated due to an out-of-memory condition, often associated with exceeding its memory limit.
+
+Q145. What is the Kubernetes scheduler's role in resource management?
+
+Answer: The scheduler considers resource requests and other scheduling constraints to select a suitable node for a Pod.
+
+Q146. What is a taint?
+
+Answer: A taint marks a node so that Pods without a matching toleration are discouraged or prevented from scheduling there, depending on the taint effect.
+
+Q147. What is a toleration?
+
+Answer: A toleration allows a Pod to be scheduled onto or remain on a node with a matching taint. It does not guarantee that the Pod will be scheduled there.
+
+Q148. What is node affinity?
+
+Answer: Node affinity expresses rules or preferences for scheduling Pods onto nodes with particular labels.
+
+Q149. What is Pod affinity?
+
+Answer: Pod affinity expresses scheduling preferences or requirements based on where matching Pods are running.
+
+Q150. What is Pod anti-affinity?
+
+Answer: Pod anti-affinity expresses rules or preferences that discourage or prevent matching Pods from being placed together in a topology.
+
+Q151. What is a HorizontalPodAutoscaler?
+
+Answer: A HorizontalPodAutoscaler automatically adjusts the number of Pod replicas based on configured metrics and scaling policies.
+
+Q152. What is Metrics Server?
+
+Answer: Metrics Server collects resource usage metrics from Kubernetes nodes and exposes them through the Metrics API for uses such as basic CPU and memory autoscaling.
+
+Q153. What is cluster autoscaling?
+
+Answer: Cluster autoscaling adjusts cluster node capacity when supported and configured, responding to workload demand and scheduling constraints.
+
+Q154. Why might a Pod remain Pending even when nodes exist?
+
+Answer: The cluster may lack sufficient CPU or memory, have incompatible taints or affinity rules, lack required storage, or have other scheduling constraints.
+
+Q155. What is a topology spread constraint?
+
+Answer: A topology spread constraint helps distribute Pods across failure domains such as nodes or zones to improve workload distribution and availability.
+
+Q156. What is a resource quota?
+
+Answer: A ResourceQuota limits aggregate resource consumption or object counts within a namespace.
+
+Q157. What is a LimitRange?
+
+Answer: A LimitRange can specify default resource requests and limits or enforce minimum and maximum resource values for supported objects in a namespace.
+
+Q158. Why should CPU and memory requests be configured?
+
+Answer: Requests help the scheduler place workloads appropriately and support capacity planning. Correct requests also improve the behavior of resource-based autoscaling.
+
+Q159. Can a HorizontalPodAutoscaler create new worker nodes?
+
+Answer: No. A HorizontalPodAutoscaler adjusts workload replica counts. A separate cluster autoscaling mechanism may add nodes if capacity is insufficient and the environment supports it.
+
+Q160. What is resource optimization in Kubernetes?
+
+Answer: Resource optimization means choosing appropriate resource requests and limits, monitoring actual usage, and adjusting capacity without compromising reliability or performance.
+
+==================================================
+SECTION 9: HEALTH CHECKS AND HIGH AVAILABILITY
+==================================================
+
+Q161. What is a liveness probe?
+
+Answer: A liveness probe checks whether a container should be restarted because the application is no longer functioning as expected.
+
+Q162. What is a readiness probe?
+
+Answer: A readiness probe checks whether a container is ready to serve requests. Failed readiness checks normally prevent the Pod from being treated as ready for Service traffic.
+
+Q163. What is a startup probe?
+
+Answer: A startup probe gives a slow-starting application time to initialize before liveness or readiness checks take effect as configured.
+
+Q164. What is the difference between readiness and liveness probes?
+
+Answer: Readiness determines whether the application should receive normal traffic. Liveness determines whether Kubernetes should restart an unhealthy container.
+
+Q165. What is a PodDisruptionBudget?
+
+Answer: A PodDisruptionBudget limits certain voluntary disruptions by specifying a minimum available count or maximum unavailable count for matching Pods.
+
+Q166. Does a PodDisruptionBudget prevent every outage?
+
+Answer: No. It does not prevent all involuntary failures, application bugs, or infrastructure outages. It helps control certain voluntary disruptions.
+
+Q167. How can multiple replicas improve availability?
+
+Answer: Multiple replicas allow an application to continue serving requests when some replicas fail, provided traffic routing, capacity, dependencies, and replica placement are configured appropriately.
+
+Q168. Why distribute replicas across availability zones?
+
+Answer: Distributing replicas across availability zones can reduce the impact of a single-zone failure when the application and its dependencies support cross-zone operation.
+
+Q169. What is graceful shutdown?
+
+Answer: Graceful shutdown allows an application to stop accepting new work, finish or safely cancel ongoing work, and exit cleanly during termination.
+
+Q170. What happens when a Pod is terminated?
+
+Answer: Kubernetes initiates termination, runs configured lifecycle hooks when applicable, and sends termination signals to containers. Containers are eventually forcefully terminated if they exceed the grace period.
+
+Q171. What is a rolling update strategy?
+
+Answer: A rolling update strategy gradually replaces old Pods with new ones according to configured limits and readiness behavior.
+
+Q172. How do health probes affect application availability?
+
+Answer: Correctly configured probes help Kubernetes identify unready or unhealthy containers. Poorly configured probes can cause unnecessary restarts or route traffic to applications that are not ready.
+
+Q173. What is a node failure domain?
+
+Answer: A failure domain is a group of infrastructure components that may fail together, such as a node, rack, or availability zone.
+
+Q174. What is application resilience?
+
+Answer: Application resilience is the ability to tolerate failures and recover while maintaining acceptable service. It may involve replicas, retries, timeouts, health checks, and graceful degradation.
+
+Q175. How do you improve Kubernetes application reliability?
+
+Answer: Configure appropriate replicas, probes, resource requests, Pod distribution, disruption budgets, observability, graceful shutdown, and tested recovery procedures.
+
+==================================================
+SECTION 10: SECURITY AND ACCESS CONTROL
+==================================================
+
+Q176. What is Kubernetes RBAC?
+
+Answer: RBAC is the authorization system that controls which users, groups, and service accounts can perform specified actions on Kubernetes resources.
+
+Q177. What is a Role?
+
+Answer: A Role defines a set of permissions for resources within a specific namespace.
+
+Q178. What is a ClusterRole?
+
+Answer: A ClusterRole defines permissions that can apply across the cluster or describe reusable permissions that can be bound within a namespace.
+
+Q179. What is a RoleBinding?
+
+Answer: A RoleBinding grants the permissions defined by a Role or ClusterRole to specified subjects within a namespace.
+
+Q180. What is a ClusterRoleBinding?
+
+Answer: A ClusterRoleBinding grants the permissions defined by a ClusterRole to specified subjects at the cluster level.
+
+Q181. What is the principle of least privilege?
+
+Answer: Least privilege means granting users and workloads only the minimum permissions needed for their responsibilities.
+
+Q182. Why should containers avoid running as root?
+
+Answer: Running as a non-root user can reduce the impact of certain container compromises, particularly when combined with other security controls.
+
+Q183. What is a SecurityContext?
+
+Answer: SecurityContext configures security-related settings for a Pod or container, such as user identity, privilege escalation, Linux capabilities, and filesystem behavior.
+
+Q184. What are Pod Security Standards?
+
+Answer: Pod Security Standards define security profiles for Pods, commonly described as Privileged, Baseline, and Restricted.
+
+Q185. What is image scanning?
+
+Answer: Image scanning checks container images for known vulnerabilities and other security issues before or during deployment.
+
+Q186. Why should container images be updated?
+
+Answer: Updating images helps incorporate security fixes, bug fixes, and dependency improvements. Updates should be tested before deployment.
+
+Q187. What is Kubernetes audit logging?
+
+Answer: Audit logging records selected API requests and their associated metadata, helping administrators investigate access and changes.
+
+Q188. What is a read-only root filesystem?
+
+Answer: A read-only root filesystem prevents applications from modifying the container's root filesystem, reducing certain risks. Applications needing temporary writes should use appropriate writable volumes.
+
+Q189. How can NetworkPolicies improve security?
+
+Answer: NetworkPolicies can restrict which Pods communicate with other Pods or network endpoints when the installed network plugin enforces the policies.
+
+Q190. What are common Kubernetes security best practices?
+
+Answer: Use least-privilege RBAC, protect Secrets, scan images, patch components, restrict network traffic, configure security contexts, and monitor audit logs.
+
+==================================================
+SECTION 11: TROUBLESHOOTING AND OPERATIONS
+==================================================
+
+Q191. How do you list all Pods in a cluster?
+
+Answer: Run `kubectl get pods -A`. This lists Pods across namespaces, subject to your permissions.
+
+Q192. How do you check node status?
+
+Answer: Run `kubectl get nodes` to view nodes and their readiness status.
+
+Q193. How do you inspect recent Kubernetes events?
+
+Answer: Run `kubectl get events --sort-by=.metadata.creationTimestamp` to inspect events ordered by their recorded creation timestamps.
+
+Q194. How do you troubleshoot a Pod that is not starting?
+
+Answer: Run `kubectl describe pod POD_NAME`, inspect its events, check container logs, verify the image and credentials, and review resource requests, storage, and scheduling constraints.
+
+Q195. How do you troubleshoot CrashLoopBackOff?
+
+Answer: Inspect current and previous container logs, check Pod events, review the startup command and configuration, and verify health probes and resource limits.
+
+Q196. How do you troubleshoot ImagePullBackOff?
+
+Answer: Verify the image repository, tag or digest, registry connectivity, image pull credentials, and permissions required to access the image.
+
+Q197. How do you troubleshoot a Service that is not accessible?
+
+Answer: Check the Service selector, targetPort, ready Pod endpoints, DNS resolution, network policies, and any external load balancer or firewall configuration.
+
+Q198. How do you troubleshoot a Deployment that is not progressing?
+
+Answer: Run `kubectl rollout status deployment/NAME` and `kubectl describe deployment NAME`. Inspect ReplicaSets, Pod events, image availability, resource capacity, and readiness probes.
+
+Q199. How do you troubleshoot a Pod stuck in Pending?
+
+Answer: Use `kubectl describe pod POD_NAME` and inspect scheduling events for insufficient resources, taints, affinity constraints, unavailable storage, or other scheduling failures.
+
+Q200. What are the key responsibilities of a Kubernetes administrator?
+
+Answer: Kubernetes administrators manage cluster availability, networking, access control, storage, upgrades, monitoring, capacity, security, troubleshooting, and recovery planning.
+
+==================================================
+END OF KUBERNETES QUESTIONS AND ANSWERS
+==================================================
