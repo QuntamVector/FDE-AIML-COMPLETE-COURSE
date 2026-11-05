@@ -1,0 +1,8 @@
+langchain-groq
+langchain-huggingface
+langchain-postgres
+langchain-text-splitters
+psycopg[binary]
+python-dotenv
+sentence-transformers
+streamlit

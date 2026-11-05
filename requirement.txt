@@ -26,3 +26,5 @@ sentence-transformers
 chromadb
 langchain-astradb
 faiss-cpu
+langchain_postgres
+torchvision
