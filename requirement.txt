@@ -31,3 +31,8 @@ torchvision
 langchain
 duckduckgo-search
 langchain_ollama
+arxiv
+ddgs
+wikipedia
+boto3
+duckdb
